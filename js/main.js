@@ -1,15 +1,19 @@
 function getRandomNumber (min, max) {
-  if (typeof min === 'number' && typeof max === 'number') {
-    return Math.round(Math.random() * (max - min)) + min; //Генерируем float от 0 до 1 и приводим его к заданным границам
+  if (!(typeof min === 'number' && typeof max === 'number')) {
+    return NaN;
   }
-  return NaN;
+  if (min > max) {
+    const buffer = min;
+    min = max;
+    max = buffer;
+  }
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min + 1) + min);
 }
-getRandomNumber(1, 132);
+getRandomNumber(1, 10);
 
 function checkValidComment (targetString, maxLength) {
-  if (typeof targetString === 'string') {
-    return !(targetString.length > maxLength);
-  }
-  return 'В функцию передана не строка!';
+  return (targetString.length <= maxLength);
 }
-checkValidComment (23, 1);
+checkValidComment ('1i', 2);
