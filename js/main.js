@@ -1,3 +1,2 @@
-import {generateGroupOfPhotos} from './data.js';
-
-console.log(generateGroupOfPhotos());
+import {startRenderind} from './rendering.js';
+startRenderind();
