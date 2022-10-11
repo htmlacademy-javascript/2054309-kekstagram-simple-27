@@ -1,2 +1,2 @@
-import {startRenderind} from './rendering.js';
-startRenderind();
+import {renderingPhoto} from './rendering.js';
+renderingPhoto();

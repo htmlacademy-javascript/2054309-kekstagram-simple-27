@@ -1,16 +1,16 @@
-import {generateGroupOfPhotos} from './data.js';
+import {getPicturesData, PHOTOS_AMOUNT} from './data.js';// Добавил PHOTOS_AMOUNT в импорт
 
-function startRenderind () {
+const renderingPhoto = () => {
   const pictures = document.querySelector('.pictures');
-  const templePicture = document.querySelector('#picture')
+  const templatePicture = document.querySelector('#picture')
     .content
     .querySelector('.picture');
 
-  const groupPhotos = generateGroupOfPhotos();
+  const groupPhotos = getPicturesData(PHOTOS_AMOUNT); //добавил число в скобки
   const listFragment = document.createDocumentFragment();
 
   groupPhotos.forEach(({ url, likes, commentsAmount }) => {
-    const randomElement = templePicture.cloneNode(true);
+    const randomElement = templatePicture.cloneNode(true);
     randomElement.querySelector('.picture__img').src = url;
     randomElement.querySelector('.picture__likes').textContent = likes;
     randomElement.querySelector('.picture__comments').textContent = commentsAmount;
@@ -18,6 +18,6 @@ function startRenderind () {
   });
 
   listFragment.appendChild(listFragment);
-}
+};
 
-export {startRenderind};
+export {renderingPhoto};

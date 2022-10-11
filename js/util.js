@@ -1,6 +1,3 @@
-let urlNumber = 0;
-let id = 0;
-
 const getRandomPositiveInteger = (a, b) => {
   // Если переданы отрицительные числа, возвращаем NaN
   if (a < 0 || b < 0) {
@@ -14,7 +11,7 @@ const getRandomPositiveInteger = (a, b) => {
 
 const getRandomArrayElement = (elements) => elements[getRandomPositiveInteger(0, elements.length - 1)];
 
-const getUrl = () => {
+/*const getUrl = () => {
   urlNumber += 1;
   return urlNumber;
 };
@@ -23,5 +20,5 @@ const getId = () => {
   id += 1;
   return id;
 };
-
-export {getRandomArrayElement, getUrl, getId, getRandomPositiveInteger, id};
+*/
+export {getRandomArrayElement, getRandomPositiveInteger};
