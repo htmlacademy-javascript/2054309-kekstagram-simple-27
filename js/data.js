@@ -34,7 +34,7 @@ function checkStringLength (string, length) {
 checkStringLength('fefede', 3);
 
 const getPictureData = (id) => {
-  const description = getRandomArrayElement([DESCRIPTION]);
+  const description = getRandomArrayElement(DESCRIPTION, 1);
   const likesAmount = getRandomPositiveInteger(MIN_LIKES_AMOUNT, MAX_LIKES_AMOUNT);
   const commentsAmount = getRandomPositiveInteger(MIN_COMMENTS_AMOUNT, MAX_COMMENTS_AMOUNT);
   const url = `photos/${id}.jpg`;
