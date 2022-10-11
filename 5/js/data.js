@@ -1,4 +1,4 @@
-import {getRandomArrayElement, getId, getUrl, getRandomPositiveInteger} from './util.js';
+import {getRandomArrayElement, getRandomPositiveInteger} from './util.js';
 
 const MIN_LIKES_AMOUNT = 15;
 const MAX_LIKES_AMOUNT = 200;
@@ -15,7 +15,7 @@ const DESCRIPTION = [
   'ПАМАГИТИ!'
 ];
 
-function generateRandomPhoto() {
+/*const generateRandomPhoto = () => {
   const photo = {};
   photo.id = getId();
   photo.url = `photos/${getUrl()}.jpg`;
@@ -24,13 +24,32 @@ function generateRandomPhoto() {
   photo.description = getRandomArrayElement(DESCRIPTION, 1);
 
   return photo;
-}
+};
 
-const generateGroupOfPhotos = () => Array.from({length: PHOTOS_AMOUNT}, generateRandomPhoto);
-
+const generatePhotosData = () => Array.from({length: PHOTOS_AMOUNT}, getPictureData);
+*/
 function checkStringLength (string, length) {
   return string.length <= length;
 }
 checkStringLength('fefede', 3);
 
-export {generateGroupOfPhotos, PHOTOS_AMOUNT};
+const getPictureData = (id) => {
+  const description = getRandomArrayElement(DESCRIPTION, 1);
+  const likesAmount = getRandomPositiveInteger(MIN_LIKES_AMOUNT, MAX_LIKES_AMOUNT);
+  const commentsAmount = getRandomPositiveInteger(MIN_COMMENTS_AMOUNT, MAX_COMMENTS_AMOUNT);
+  const url = `photos/${id}.jpg`;
+
+  return { id, description, likesAmount, commentsAmount, url };
+};
+
+const getPicturesData = (picturesCount) => {
+  const result = [];
+
+  for (let i = 1; i <= picturesCount; i++) {
+    const pictureData = getPictureData(i);
+    result.push(pictureData);
+  }
+
+  return result;
+};
+export {getPicturesData, PHOTOS_AMOUNT};
