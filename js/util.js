@@ -11,14 +11,4 @@ const getRandomPositiveInteger = (a, b) => {
 
 const getRandomArrayElement = (elements) => elements[getRandomPositiveInteger(0, elements.length - 1)];
 
-/*const getUrl = () => {
-  urlNumber += 1;
-  return urlNumber;
-};
-
-const getId = () => {
-  id += 1;
-  return id;
-};
-*/
 export {getRandomArrayElement, getRandomPositiveInteger};

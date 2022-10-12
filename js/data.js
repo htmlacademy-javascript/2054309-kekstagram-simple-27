@@ -15,19 +15,6 @@ const DESCRIPTION = [
   'ПАМАГИТИ!'
 ];
 
-/*const generateRandomPhoto = () => {
-  const photo = {};
-  photo.id = getId();
-  photo.url = `photos/${getUrl()}.jpg`;
-  photo.likes = getRandomPositiveInteger(MIN_LIKES_AMOUNT, MAX_LIKES_AMOUNT);
-  photo.commentsAmount = getRandomPositiveInteger(MIN_COMMENTS_AMOUNT, MAX_COMMENTS_AMOUNT);
-  photo.description = getRandomArrayElement(DESCRIPTION, 1);
-
-  return photo;
-};
-
-const generatePhotosData = () => Array.from({length: PHOTOS_AMOUNT}, getPictureData);
-*/
 function checkStringLength (string, length) {
   return string.length <= length;
 }

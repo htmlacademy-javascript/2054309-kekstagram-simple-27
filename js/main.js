@@ -1,2 +1,2 @@
-import {renderingPhoto} from './rendering.js';
-renderingPhoto();
+import {renderPhoto} from './rendering.js';
+renderPhoto();
