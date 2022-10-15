@@ -20,7 +20,7 @@
       <section class="img-upload">
         <div class="img-upload__wrapper">
           <h2 class="img-upload__title  visually-hidden">Загрузка фотографии</h2>
-          <form class="img-upload__form" id="upload-select-image" method="post" enctype="multipart/form-data" autocomplete="off">
+          <form class="img-upload__form" id="upload-select-image" method="POST" action="https://27.javascript.pages.academy/kekstagram-simple" enctype="multipart/form-data" autocomplete="off">
 
             <!-- Изначальное состояние поля для загрузки изображения -->
             <fieldset class="img-upload__start">
@@ -105,8 +105,10 @@
 
                 <!-- Добавление комментария к изображению -->
                 <fieldset class="img-upload__text text">
-                    <textarea class="text__description" name="description" placeholder="Ваш комментарий..."></textarea>
-                </fieldset>
+                  <label class = validation-comment>
+                    <textarea class="text__description" name="description" placeholder="Ваш комментарий..." required minlength="20" maxlength="140"></textarea>
+                  <label>
+                  </fieldset>
 
                 <!-- Кнопка для отправки данных на сервер -->
                 <button type="submit" class="img-upload__submit" id="upload-submit">Опубликовать</button>
@@ -165,6 +167,7 @@
     </section>
   </template>
 
+  <script src="vendor\pristine\pristine.min.js"></script>
   <script src="js/main.js" type="module"></script>
 
 </body>
