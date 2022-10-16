@@ -8,16 +8,6 @@ const buttonForPost = document.querySelector('.img-upload__form');
 
 const descriptionObject = document.querySelector('.text__description');
 
-const openUserModal = () => {
-  photoRedactionForm.classList.remove('hidden');
-  bodyElement.classList.add('modal-open');
-  document.addEventListener('keydown', onPhotoEditor);
-  userModalCloseElement.addEventListener('click', () => {
-    photoRedactionForm.classList.add('hidden');
-    bodyElement.classList.remove('modal-open');
-  });
-};
-
 const closeUserModal = () => {
   photoRedactionForm.classList.add('hidden');
   bodyElement.classList.remove('modal-open');
@@ -26,7 +16,18 @@ const closeUserModal = () => {
   descriptionObject.value = '';
   document.querySelector('input[name="effect"]:checked').checked = false;
   document.querySelector('#effect-none').checked = true;
+  userModalCloseElement.removeEventListener('click', closeUserModal);
+  controlUploadFile.addEventListener('change', openUserModal);
 };
+// Нужно "всплывание", поэтому не стрелочная
+function openUserModal() {
+  photoRedactionForm.classList.remove('hidden');
+  bodyElement.classList.add('modal-open');
+  document.addEventListener('keydown', onPhotoEditor);
+  userModalCloseElement.addEventListener('click',closeUserModal);
+  controlUploadFile.removeEventListener('change', openUserModal);
+}
+
 // Нужно "всплывание", поэтому не стрелочная
 function onPhotoEditor (evt) {
   if (isEscapeKey(evt)) {
@@ -35,13 +36,7 @@ function onPhotoEditor (evt) {
   }
 }
 
-controlUploadFile.addEventListener('change', () => {
-  openUserModal();
-});
-
-userModalCloseElement.addEventListener('click', () => {
-  closeUserModal();
-});
+controlUploadFile.addEventListener('change', openUserModal);
 
 const validateData = new Pristine(buttonForPost, {
   classTo: 'validation-comment',
