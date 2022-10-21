@@ -37,13 +37,11 @@ function onFilterChange (evt) {
       levelLine.noUiSlider.on('update', () => {
         sliderInput.value = levelLine.noUiSlider.get();
         imgPreview.style.filter = 'none';
-        setTimeout(() => {
+        {
           imgPreview.style.filter = `${evt.target.dataset.styleName}(${sliderInput.value}${evt.target.dataset.styleSuffix})`;
-        },0);
+        }
       });
-      setTimeout(() => {
-        imgPreview.style.filter = `${evt.target.dataset.styleName}(${sliderInput.value}${evt.target.dataset.styleSuffix})`;
-      },0);
+      imgPreview.style.filter = `${evt.target.dataset.styleName}(${sliderInput.value}${evt.target.dataset.styleSuffix})`;
     }
   }
 }
