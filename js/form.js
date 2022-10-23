@@ -5,8 +5,11 @@ const controlUploadFile = document.querySelector('#upload-file');
 const bodyElement = document.querySelector('body');
 const userModalCloseElement = document.querySelector('#upload-cancel');
 const buttonForPost = document.querySelector('.img-upload__form');
-
 const descriptionObject = document.querySelector('.text__description');
+
+const imageContainer = document.querySelector('.img-upload__preview');
+const imageCore = imageContainer.querySelector('img');
+const sliderFieldset = document.querySelector('.img-upload__effect-level');
 
 const closeUserModal = () => {
   photoRedactionForm.classList.add('hidden');
@@ -18,11 +21,14 @@ const closeUserModal = () => {
   document.querySelector('#effect-none').checked = true;
   userModalCloseElement.removeEventListener('click', closeUserModal);
   controlUploadFile.addEventListener('change', openUserModal);
+  imageCore.style.filter = 'none';
+  sliderFieldset.style.display = 'none';
 };
 // Нужно "всплывание", поэтому не стрелочная
 function openUserModal() {
   photoRedactionForm.classList.remove('hidden');
   bodyElement.classList.add('modal-open');
+  sliderFieldset.style.display = 'none';
   document.addEventListener('keydown', onPhotoEditor);
   userModalCloseElement.addEventListener('click',closeUserModal);
   controlUploadFile.removeEventListener('change', openUserModal);
@@ -52,4 +58,4 @@ buttonForPost.addEventListener('submit', (evt) => {
   }
 });
 
-export {validateData};
+export {validateData, controlUploadFile};
