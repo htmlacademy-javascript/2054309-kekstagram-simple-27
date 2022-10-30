@@ -1,9 +1,11 @@
-import {validateData} from './form.js';
-import {renderPhoto} from './rendering.js';
+//import {validateData} from './form.js';
 import {initChangePhoto} from './change-photo.js';
 import {initialisationSlider} from './slider.js';
+import {getData} from './api.js';
+import {setUserFormSubmit, closeUserModal} from './form.js';
 
-renderPhoto();
-console.log(validateData);
+//console.log(validateData);
 initChangePhoto();
 initialisationSlider();
+getData();
+setUserFormSubmit(closeUserModal);

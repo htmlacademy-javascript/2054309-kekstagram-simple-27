@@ -1,16 +1,26 @@
-const getRandomPositiveInteger = (a, b) => {
-  // Если переданы отрицительные числа, возвращаем NaN
-  if (a < 0 || b < 0) {
-    return NaN;
-  }
-  const lower = Math.ceil(Math.min(a, b));
-  const upper = Math.floor(Math.max(a, b));
-  const result = Math.random() * (upper - lower + 1) + lower;
-  return Math.floor(result);
-};
-
-const getRandomArrayElement = (elements) => elements[getRandomPositiveInteger(0, elements.length - 1)];
-
 const isEscapeKey = (evt) => evt.key === 'Escape';
 
-export {getRandomArrayElement, getRandomPositiveInteger, isEscapeKey};
+const userPhotosLoadError = () => {
+  const windowError = document.createElement('div');
+  const textError = document.createElement('p');
+  textError.textContent = 'Что-то пошло совсем не по плану :С Возможно, гремлины украли сервер';
+  textError.style.color = 'black';
+  windowError.appendChild(textError);
+  windowError.style.position = 'absolute';
+  windowError.style.top = '50%';
+  windowError.style.left = '50%';
+  windowError.style.marginTop = '-100px';
+  windowError.style.marginLeft = '-200px';
+  windowError.style.width = '400px';
+  windowError.style.backgroundColor = 'red';
+  windowError.style.borderRadius = '8px';
+  windowError.style.border = '5px solid #ffaaff';
+  windowError.style.padding = ' 5px 10px';
+  document.body.append(windowError);
+
+  setTimeout(() => {
+    windowError.remove();
+  }, 5000);
+};
+
+export {isEscapeKey, userPhotosLoadError};
