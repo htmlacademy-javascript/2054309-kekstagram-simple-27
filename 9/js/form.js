@@ -15,45 +15,6 @@ const imageContainer = document.querySelector('.img-upload__preview');
 const imageCore = imageContainer.querySelector('img');
 const sliderFieldset = document.querySelector('.img-upload__effect-level');
 
-const closeUserModal = () => {
-  photoRedactionForm.classList.add('hidden');
-  bodyElement.classList.remove('modal-open');
-  document.removeEventListener('keydown', onPhotoEditor);
-  controlUploadFile.value = '';
-  descriptionObject.value = '';
-  document.querySelector('input[name="effect"]:checked').checked = false;
-  document.querySelector('#effect-none').checked = true;
-  userModalCloseElement.removeEventListener('click', closeUserModal);
-  controlUploadFile.addEventListener('change', openUserModal);
-  imageCore.style.filter = 'none';
-  sliderFieldset.style.display = 'none';
-};
-// Нужно "всплывание", поэтому не стрелочная
-function openUserModal() {
-  photoRedactionForm.classList.remove('hidden');
-  bodyElement.classList.add('modal-open');
-  sliderFieldset.style.display = 'none';
-  document.addEventListener('keydown', onPhotoEditor);
-  userModalCloseElement.addEventListener('click',closeUserModal);
-  controlUploadFile.removeEventListener('change', openUserModal);
-}
-
-// Нужно "всплывание", поэтому не стрелочная
-function onPhotoEditor (evt) {
-  if (isEscapeKey(evt)) {
-    evt.preventDefault();
-    closeUserModal();
-  }
-}
-
-controlUploadFile.addEventListener('change', openUserModal);
-
-const validateData = new Pristine(buttonForPost, {
-  classTo: 'validation-comment',
-  errorTextParent: 'validation-comment',
-  errorTextClass: 'validation-comment__error-text',
-});
-
 const showOkUpload = () => {
   const successElement = uploadSuccessTemplate.cloneNode(true);
   bodyElement.appendChild(successElement);
@@ -95,6 +56,46 @@ const showOkUpload = () => {
 
   document.addEventListener('keydown', onSuccessModalEscKeydown);
 };
+
+const closeUserModal = () => {
+  photoRedactionForm.classList.add('hidden');
+  bodyElement.classList.remove('modal-open');
+  showOkUpload();
+  document.removeEventListener('keydown', onPhotoEditor);
+  controlUploadFile.value = '';
+  descriptionObject.value = '';
+  document.querySelector('input[name="effect"]:checked').checked = false;
+  document.querySelector('#effect-none').checked = true;
+  userModalCloseElement.removeEventListener('click', closeUserModal);
+  controlUploadFile.addEventListener('change', openUserModal);
+  imageCore.style.filter = 'none';
+  sliderFieldset.style.display = 'none';
+};
+// Нужно "всплывание", поэтому не стрелочная
+function openUserModal() {
+  photoRedactionForm.classList.remove('hidden');
+  bodyElement.classList.add('modal-open');
+  sliderFieldset.style.display = 'none';
+  document.addEventListener('keydown', onPhotoEditor);
+  userModalCloseElement.addEventListener('click',closeUserModal);
+  controlUploadFile.removeEventListener('change', openUserModal);
+}
+
+// Нужно "всплывание", поэтому не стрелочная
+function onPhotoEditor (evt) {
+  if (isEscapeKey(evt)) {
+    evt.preventDefault();
+    closeUserModal();
+  }
+}
+
+controlUploadFile.addEventListener('change', openUserModal);
+
+const validateData = new Pristine(buttonForPost, {
+  classTo: 'validation-comment',
+  errorTextParent: 'validation-comment',
+  errorTextClass: 'validation-comment__error-text',
+});
 
 const showFailUpload = () => {
   const errorElement = uploadErrorTemplate.cloneNode(true);
@@ -147,14 +148,14 @@ const enableUploadButton = () => {
   uploadSubmit.textContent = 'Опубликовать';
 };
 
-const setUserFormSubmit = (onSuccess) => {
+const setUserFormSubmit = (onSuccess, onError) => {
   buttonForPost.addEventListener('submit', (evt) => {
     evt.preventDefault();
     const isValid = validateData.validate();
     if (isValid) {
       disableButton();
-      sendData(onSuccess, evt);
+      sendData(onSuccess, onError, evt.target);
     }});
 };
 
-export {validateData, controlUploadFile, setUserFormSubmit, closeUserModal, showOkUpload, showFailUpload, enableUploadButton};
+export {validateData, controlUploadFile, setUserFormSubmit, closeUserModal, openUserModal, showOkUpload, showFailUpload, enableUploadButton};

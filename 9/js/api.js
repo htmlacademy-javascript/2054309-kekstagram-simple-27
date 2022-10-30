@@ -1,42 +1,35 @@
-import {renderPhoto} from './rendering.js';
-import {userPhotosLoadError} from './util.js';
-import {showOkUpload, showFailUpload, enableUploadButton} from './form.js';
+import {enableUploadButton} from './form.js';
 
-const getData = () => {
+const getData = (onSuccess, onError) => {
   fetch('https://27.javascript.pages.academy/kekstagram-simple/data')
     .then((response) => {
       if (response.ok) {
         return response.json();
       } else {
-        userPhotosLoadError();
+        onError();
       }
     })
-    .then((photos) => {
-      renderPhoto(photos);
-    })
-    .catch(() => {
-      userPhotosLoadError();
-    });
+    .then(onSuccess)
+    .catch(onError);
 };
 
-const sendData = (onSuccess, evt) => {
+const sendData = (onSuccess, onError, eventTarget) => {
   fetch(
     'https://27.javascript.pages.academy/kekstagram-simple',
     {
       method: 'POST',
-      body: new FormData(evt.target),
+      body: new FormData(eventTarget),
     },
   )
     .then((response) => {
       if (response.ok) {
         onSuccess();
-        showOkUpload();
       } else {
-        showFailUpload();
+        onError();
       }
     })
     .catch(() => {
-      showFailUpload();
+      onError();
     })
     .finally(() => {
       enableUploadButton();
