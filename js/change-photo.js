@@ -7,8 +7,6 @@ const scaleValue = document.querySelector('.scale__control--value');
 const imageContainer = document.querySelector('.img-upload__preview');
 const effectsList = document.querySelector('.img-upload__effects');
 
-//let previousClass;
-
 const writeTargetScale = (imageScaleValue) => {
   scaleValue.value = `${imageScaleValue}%`;
   const scalePercent = imageScaleValue / 100;
