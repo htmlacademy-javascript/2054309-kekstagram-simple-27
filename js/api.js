@@ -1,7 +1,12 @@
 import {enableUploadButton} from './form.js';
 
+const Addresses = {
+  ADDRESS_TO: 'https://27.javascript.pages.academy/kekstagram-simple',
+  ADDRESS_FROM: 'https://27.javascript.pages.academy/kekstagram-simple/data'
+};
+
 const getData = (onSuccess, onError) => {
-  fetch('https://27.javascript.pages.academy/kekstagram-simple/data')
+  fetch(Addresses.ADDRESS_FROM)
     .then((response) => {
       if (response.ok) {
         return response.json();
@@ -13,12 +18,12 @@ const getData = (onSuccess, onError) => {
     .catch(onError);
 };
 
-const sendData = (onSuccess, onError, eventTarget) => {
+const sendData = (onSuccess, onError, dataForPost) => {
   fetch(
-    'https://27.javascript.pages.academy/kekstagram-simple',
+    Addresses.ADDRESS_TO,
     {
       method: 'POST',
-      body: new FormData(eventTarget),
+      body: dataForPost,
     },
   )
     .then((response) => {
@@ -28,12 +33,8 @@ const sendData = (onSuccess, onError, eventTarget) => {
         onError();
       }
     })
-    .catch(() => {
-      onError();
-    })
-    .finally(() => {
-      enableUploadButton();
-    });
+    .catch(onError)
+    .finally(enableUploadButton);
 };
 
 export {getData, sendData};
