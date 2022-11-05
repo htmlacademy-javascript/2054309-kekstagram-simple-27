@@ -32,7 +32,7 @@ const onFilterChange = (evt) => {
   }
 };
 
-const initialisationSlider = () => {
+const initSlider = () => {
   noUiSlider.create(levelLineElement, {
     range: {
       min: 0,
@@ -48,4 +48,4 @@ const initialisationSlider = () => {
   });
 };
 
-export {onFilterChange, initialisationSlider};
+export {onFilterChange, initSlider};

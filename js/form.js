@@ -15,24 +15,24 @@ const imageContainerElement = document.querySelector('.img-upload__preview');
 const imageCoreElement = imageContainerElement.querySelector('img');
 const sliderFieldsetElement = document.querySelector('.img-upload__effect-level');
 
-const showOkUpload = () => {
+const showSuccessModal = () => {
   const successElement = uploadSuccessTemplateElement.cloneNode(true);
   bodyElement.appendChild(successElement);
-  const closeSuccessButton = document.querySelector('.success__button');
-  const successModal = document.querySelector('.success');
-  const successInner = successModal.querySelector('.success__inner');
+  const closeSuccessButtonElement = document.querySelector('.success__button');
+  const successModalElement = document.querySelector('.success');
+  const successInnerElement = successModalElement.querySelector('.success__inner');
 
   const onSuccessModalEscKeydown = (evt) => {
     if (isEscapeKey(evt)) {
       evt.preventDefault();
-      successModal.remove();
+      successModalElement.remove();
       document.removeEventListener('keydown', onSuccessModalEscKeydown);
     }
   };
 
   const onMissClickClose = (node) => {
     const closeMessage = () => {
-      successModal.remove();
+      successModalElement.remove();
     };
 
     const testFunction = (element) => {
@@ -48,9 +48,9 @@ const showOkUpload = () => {
     document.addEventListener('click', testFunction);
   };
 
-  onMissClickClose(successInner);
-  closeSuccessButton.addEventListener('click', () => {
-    successModal.remove();
+  onMissClickClose(successInnerElement);
+  closeSuccessButtonElement.addEventListener('click', () => {
+    successModalElement.remove();
     document.removeEventListener('keydown', onSuccessModalEscKeydown);
   });
 
@@ -60,7 +60,7 @@ const showOkUpload = () => {
 const closeUserModal = () => {
   photoRedactionFormElement.classList.add('hidden');
   bodyElement.classList.remove('modal-open');
-  showOkUpload();
+  showSuccessModal();
   document.removeEventListener('keydown', onPhotoEditor);
   controlUploadFileElement.value = '';
   descriptionObjectElement.value = '';
@@ -100,21 +100,21 @@ const validateData = new Pristine(buttonForPostElement, {
 const showFailUpload = () => {
   const errorElement = uploadErrorTemplateElement.cloneNode(true);
   bodyElement.appendChild(errorElement);
-  const closeErrorButton = document.querySelector('.error__button');
-  const errorModal = document.querySelector('.error');
-  const errorInner = errorModal.querySelector('.error__inner');
+  const closeErrorButtonElement = document.querySelector('.error__button');
+  const errorModalElement = document.querySelector('.error');
+  const errorInnerElement = errorModalElement.querySelector('.error__inner');
 
   const onErrorModalEscKeydown = (evt) => {
     if (isEscapeKey(evt)) {
       evt.preventDefault();
-      errorModal.remove();
+      errorModalElement.remove();
       document.removeEventListener('keydown', onErrorModalEscKeydown);
     }
   };
 
   const missClickErrorClose = (node) => {
     const closeMessage = () => {
-      errorModal.remove();
+      errorModalElement.remove();
     };
 
     const tesrErrFunction = (element) => {
@@ -129,9 +129,9 @@ const showFailUpload = () => {
     document.addEventListener('click', tesrErrFunction);
   };
 
-  missClickErrorClose(errorInner);
-  closeErrorButton.addEventListener('click', () => {
-    errorModal.remove();
+  missClickErrorClose(errorInnerElement);
+  closeErrorButtonElement.addEventListener('click', () => {
+    errorModalElement.remove();
     document.removeEventListener('keydown', onErrorModalEscKeydown);
   });
 
@@ -148,7 +148,7 @@ const enableUploadButton = () => {
   uploadSubmitElement.textContent = 'Опубликовать';
 };
 
-const setUserFormSubmit = (onSuccess, onError) => {
+const initForm = (onSuccess, onError) => {
   buttonForPostElement.addEventListener('submit', (evt) => {
     evt.preventDefault();
     const isValid = validateData.validate();
@@ -159,4 +159,4 @@ const setUserFormSubmit = (onSuccess, onError) => {
     }});
 };
 
-export {validateData, controlUploadFileElement, setUserFormSubmit, closeUserModal, openUserModal, showFailUpload, enableUploadButton};
+export {validateData, controlUploadFileElement, initForm, closeUserModal, openUserModal, showFailUpload, enableUploadButton};

@@ -1,6 +1,6 @@
 const isEscapeKey = (evt) => evt.key === 'Escape';
 
-const loadUserPhotosError = () => {
+const showErrorModal = () => {
   const windowErrorElemet = document.createElement('div');
   const textErrorElement = document.createElement('p');
   textErrorElement.textContent = 'Что-то пошло совсем не по плану :С Возможно, гремлины украли сервер';
@@ -23,4 +23,4 @@ const loadUserPhotosError = () => {
   }, 5000);
 };
 
-export {isEscapeKey, loadUserPhotosError};
+export {isEscapeKey, showErrorModal};

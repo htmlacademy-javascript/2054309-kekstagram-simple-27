@@ -1,12 +1,12 @@
 import {enableUploadButton} from './form.js';
 
-const Addresses = {
-  ADDRESS_TO: 'https://27.javascript.pages.academy/kekstagram-simple',
-  ADDRESS_FROM: 'https://27.javascript.pages.academy/kekstagram-simple/data'
+const ApiUrsl = {
+  ROOT: 'https://27.javascript.pages.academy/kekstagram-simple',
+  DATA: 'https://27.javascript.pages.academy/kekstagram-simple/data'
 };
 
 const getData = (onSuccess, onError) => {
-  fetch(Addresses.ADDRESS_FROM)
+  fetch(ApiUrsl.DATA)
     .then((response) => {
       if (response.ok) {
         return response.json();
@@ -20,7 +20,7 @@ const getData = (onSuccess, onError) => {
 
 const sendData = (onSuccess, onError, dataForPost) => {
   fetch(
-    Addresses.ADDRESS_TO,
+    ApiUrsl.ROOT,
     {
       method: 'POST',
       body: dataForPost,

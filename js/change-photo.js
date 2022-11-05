@@ -7,7 +7,7 @@ const scaleValueElement = document.querySelector('.scale__control--value');
 const imageContainerElement = document.querySelector('.img-upload__preview');
 const effectsListElement = document.querySelector('.img-upload__effects');
 
-const writeTargetScale = (imageScaleValue) => {
+const changeScale = (imageScaleValue) => {
   scaleValueElement.value = `${imageScaleValue}%`;
   const scalePercent = imageScaleValue / 100;
   imageContainerElement.style.transform = `scale(${scalePercent})`;
@@ -20,14 +20,14 @@ const initChangePhoto = () => {
   biggerButtonElement.addEventListener('click', () => {
     if (imageScaleValue < 100 && imageScaleValue >= 25) {
       imageScaleValue += 25;
-      writeTargetScale(imageScaleValue);
+      changeScale(imageScaleValue);
     }
   });
 
   smallerButtonElement.addEventListener('click', () => {
     if (imageScaleValue <= 100 && imageScaleValue > 25) {
       imageScaleValue -= 25;
-      writeTargetScale(imageScaleValue);
+      changeScale(imageScaleValue);
     }
   });
 
@@ -46,7 +46,7 @@ const initChangePhoto = () => {
 
 function reloadPhoto (imageScaleValue) {
   imageScaleValue = 100;
-  writeTargetScale(imageScaleValue);
+  changeScale(imageScaleValue);
 }
 
-export {writeTargetScale, initChangePhoto};
+export {changeScale, initChangePhoto};
