@@ -1,38 +1,38 @@
 import {isEscapeKey} from './util.js';
 import {sendData} from './api.js';
 
-const photoRedactionForm = document.querySelector('.img-upload__overlay');
-const controlUploadFile = document.querySelector('#upload-file');
+const photoRedactionFormElement = document.querySelector('.img-upload__overlay');
+const controlUploadFileElement = document.querySelector('#upload-file');
 const bodyElement = document.querySelector('body');
 const userModalCloseElement = document.querySelector('#upload-cancel');
-const buttonForPost = document.querySelector('.img-upload__form');
-const descriptionObject = document.querySelector('.text__description');
-const uploadSuccessTemplate = document.querySelector('#success').content;
-const uploadErrorTemplate = document.querySelector('#error').content;
-const uploadSubmit = document.querySelector('#upload-submit');
+const buttonForPostElement = document.querySelector('.img-upload__form');
+const descriptionObjectElement = document.querySelector('.text__description');
+const uploadSuccessTemplateElement = document.querySelector('#success').content;
+const uploadErrorTemplateElement = document.querySelector('#error').content;
+const uploadSubmitElement = document.querySelector('#upload-submit');
 
-const imageContainer = document.querySelector('.img-upload__preview');
-const imageCore = imageContainer.querySelector('img');
-const sliderFieldset = document.querySelector('.img-upload__effect-level');
+const imageContainerElement = document.querySelector('.img-upload__preview');
+const imageCoreElement = imageContainerElement.querySelector('img');
+const sliderFieldsetElement = document.querySelector('.img-upload__effect-level');
 
-const showOkUpload = () => {
-  const successElement = uploadSuccessTemplate.cloneNode(true);
+const showSuccessModal = () => {
+  const successElement = uploadSuccessTemplateElement.cloneNode(true);
   bodyElement.appendChild(successElement);
-  const closeSuccessButton = document.querySelector('.success__button');
-  const successModal = document.querySelector('.success');
-  const successInner = successModal.querySelector('.success__inner');
+  const closeSuccessButtonElement = document.querySelector('.success__button');
+  const successModalElement = document.querySelector('.success');
+  const successInnerElement = successModalElement.querySelector('.success__inner');
 
   const onSuccessModalEscKeydown = (evt) => {
     if (isEscapeKey(evt)) {
       evt.preventDefault();
-      successModal.remove();
+      successModalElement.remove();
       document.removeEventListener('keydown', onSuccessModalEscKeydown);
     }
   };
 
   const onMissClickClose = (node) => {
     const closeMessage = () => {
-      successModal.remove();
+      successModalElement.remove();
     };
 
     const testFunction = (element) => {
@@ -48,9 +48,9 @@ const showOkUpload = () => {
     document.addEventListener('click', testFunction);
   };
 
-  onMissClickClose(successInner);
-  closeSuccessButton.addEventListener('click', () => {
-    successModal.remove();
+  onMissClickClose(successInnerElement);
+  closeSuccessButtonElement.addEventListener('click', () => {
+    successModalElement.remove();
     document.removeEventListener('keydown', onSuccessModalEscKeydown);
   });
 
@@ -58,27 +58,27 @@ const showOkUpload = () => {
 };
 
 const closeUserModal = () => {
-  photoRedactionForm.classList.add('hidden');
+  photoRedactionFormElement.classList.add('hidden');
   bodyElement.classList.remove('modal-open');
-  showOkUpload();
+  showSuccessModal();
   document.removeEventListener('keydown', onPhotoEditor);
-  controlUploadFile.value = '';
-  descriptionObject.value = '';
+  controlUploadFileElement.value = '';
+  descriptionObjectElement.value = '';
   document.querySelector('input[name="effect"]:checked').checked = false;
   document.querySelector('#effect-none').checked = true;
   userModalCloseElement.removeEventListener('click', closeUserModal);
-  controlUploadFile.addEventListener('change', openUserModal);
-  imageCore.style.filter = 'none';
-  sliderFieldset.style.display = 'none';
+  controlUploadFileElement.addEventListener('change', openUserModal);
+  imageCoreElement.style.filter = 'none';
+  sliderFieldsetElement.style.display = 'none';
 };
 // Нужно "всплывание", поэтому не стрелочная
 function openUserModal() {
-  photoRedactionForm.classList.remove('hidden');
+  photoRedactionFormElement.classList.remove('hidden');
   bodyElement.classList.add('modal-open');
-  sliderFieldset.style.display = 'none';
+  sliderFieldsetElement.style.display = 'none';
   document.addEventListener('keydown', onPhotoEditor);
   userModalCloseElement.addEventListener('click',closeUserModal);
-  controlUploadFile.removeEventListener('change', openUserModal);
+  controlUploadFileElement.removeEventListener('change', openUserModal);
 }
 
 // Нужно "всплывание", поэтому не стрелочная
@@ -89,32 +89,32 @@ function onPhotoEditor (evt) {
   }
 }
 
-controlUploadFile.addEventListener('change', openUserModal);
+controlUploadFileElement.addEventListener('change', openUserModal);
 
-const validateData = new Pristine(buttonForPost, {
+const validateData = new Pristine(buttonForPostElement, {
   classTo: 'validation-comment',
   errorTextParent: 'validation-comment',
   errorTextClass: 'validation-comment__error-text',
 });
 
 const showFailUpload = () => {
-  const errorElement = uploadErrorTemplate.cloneNode(true);
+  const errorElement = uploadErrorTemplateElement.cloneNode(true);
   bodyElement.appendChild(errorElement);
-  const closeErrorButton = document.querySelector('.error__button');
-  const errorModal = document.querySelector('.error');
-  const errorInner = errorModal.querySelector('.error__inner');
+  const closeErrorButtonElement = document.querySelector('.error__button');
+  const errorModalElement = document.querySelector('.error');
+  const errorInnerElement = errorModalElement.querySelector('.error__inner');
 
   const onErrorModalEscKeydown = (evt) => {
     if (isEscapeKey(evt)) {
       evt.preventDefault();
-      errorModal.remove();
+      errorModalElement.remove();
       document.removeEventListener('keydown', onErrorModalEscKeydown);
     }
   };
 
   const missClickErrorClose = (node) => {
     const closeMessage = () => {
-      errorModal.remove();
+      errorModalElement.remove();
     };
 
     const tesrErrFunction = (element) => {
@@ -129,9 +129,9 @@ const showFailUpload = () => {
     document.addEventListener('click', tesrErrFunction);
   };
 
-  missClickErrorClose(errorInner);
-  closeErrorButton.addEventListener('click', () => {
-    errorModal.remove();
+  missClickErrorClose(errorInnerElement);
+  closeErrorButtonElement.addEventListener('click', () => {
+    errorModalElement.remove();
     document.removeEventListener('keydown', onErrorModalEscKeydown);
   });
 
@@ -139,23 +139,24 @@ const showFailUpload = () => {
 };
 
 const disableButton = () => {
-  uploadSubmit.disabled = true;
-  uploadSubmit.textContent = 'Обожди, работаем...';
+  uploadSubmitElement.disabled = true;
+  uploadSubmitElement.textContent = 'Обожди, работаем...';
 };
 
 const enableUploadButton = () => {
-  uploadSubmit.disabled = false;
-  uploadSubmit.textContent = 'Опубликовать';
+  uploadSubmitElement.disabled = false;
+  uploadSubmitElement.textContent = 'Опубликовать';
 };
 
-const setUserFormSubmit = (onSuccess, onError) => {
-  buttonForPost.addEventListener('submit', (evt) => {
+const initForm = (onSuccess, onError) => {
+  buttonForPostElement.addEventListener('submit', (evt) => {
     evt.preventDefault();
     const isValid = validateData.validate();
     if (isValid) {
       disableButton();
-      sendData(onSuccess, onError, evt.target);
+      const dataForm = new FormData(evt.target);
+      sendData(onSuccess, onError, dataForm);
     }});
 };
 
-export {validateData, controlUploadFile, setUserFormSubmit, closeUserModal, openUserModal, showOkUpload, showFailUpload, enableUploadButton};
+export {validateData, controlUploadFileElement, initForm, closeUserModal, openUserModal, showFailUpload, enableUploadButton};

@@ -9,12 +9,12 @@ const createPhotoElement = (photoData, templatePicture) => {
 };
 
 const renderPhoto = (photoDataServer) => {
-  const template = document.querySelector('#picture')
+  const templateElement = document.querySelector('#picture')
     .content
     .querySelector('.picture');
-  const parent = document.querySelector('.pictures');
+  const parentElement = document.querySelector('.pictures');
   photoDataServer.forEach((photosData) => {
-    parent.appendChild(createPhotoElement(photosData, template));
+    parentElement.appendChild(createPhotoElement(photosData, templateElement));
   });};
 
 export {renderPhoto};

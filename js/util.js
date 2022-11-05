@@ -1,26 +1,26 @@
 const isEscapeKey = (evt) => evt.key === 'Escape';
 
-const loadUserPhotosError = () => {
-  const windowError = document.createElement('div');
-  const textError = document.createElement('p');
-  textError.textContent = 'Что-то пошло совсем не по плану :С Возможно, гремлины украли сервер';
-  textError.style.color = 'black';
-  windowError.appendChild(textError);
-  windowError.style.position = 'absolute';
-  windowError.style.top = '50%';
-  windowError.style.left = '50%';
-  windowError.style.marginTop = '-100px';
-  windowError.style.marginLeft = '-200px';
-  windowError.style.width = '400px';
-  windowError.style.backgroundColor = 'red';
-  windowError.style.borderRadius = '8px';
-  windowError.style.border = '5px solid #ffaaff';
-  windowError.style.padding = ' 5px 10px';
-  document.body.append(windowError);
+const showErrorModal = () => {
+  const windowErrorElemet = document.createElement('div');
+  const textErrorElement = document.createElement('p');
+  textErrorElement.textContent = 'Что-то пошло совсем не по плану :С Возможно, гремлины украли сервер';
+  textErrorElement.style.color = 'black';
+  windowErrorElemet.appendChild(textErrorElement);
+  windowErrorElemet.style.position = 'absolute';
+  windowErrorElemet.style.top = '50%';
+  windowErrorElemet.style.left = '50%';
+  windowErrorElemet.style.marginTop = '-100px';
+  windowErrorElemet.style.marginLeft = '-200px';
+  windowErrorElemet.style.width = '400px';
+  windowErrorElemet.style.backgroundColor = 'red';
+  windowErrorElemet.style.borderRadius = '8px';
+  windowErrorElemet.style.border = '5px solid #ffaaff';
+  windowErrorElemet.style.padding = ' 5px 10px';
+  document.body.append(windowErrorElemet);
 
   setTimeout(() => {
-    windowError.remove();
+    windowErrorElemet.remove();
   }, 5000);
 };
 
-export {isEscapeKey, loadUserPhotosError};
+export {isEscapeKey, showErrorModal};

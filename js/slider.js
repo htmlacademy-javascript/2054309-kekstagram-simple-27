@@ -1,18 +1,18 @@
-const sliderFieldset = document.querySelector('.img-upload__effect-level');
-const overlay = document.querySelector('.img-upload__overlay');
-const levelLine = overlay.querySelector('.effect-level__slider');
-const imgPreview = overlay.querySelector('.img-upload__preview').querySelector('img');
-const sliderInput = overlay.querySelector('.effect-level__value');
+const sliderFieldsetElement = document.querySelector('.img-upload__effect-level');
+const overlayElement = document.querySelector('.img-upload__overlay');
+const levelLineElement = overlayElement.querySelector('.effect-level__slider');
+const imgPreviewElement = overlayElement.querySelector('.img-upload__preview').querySelector('img');
+const sliderInputElement = overlayElement.querySelector('.effect-level__value');
 
 const onFilterChange = (evt) => {
   if (evt.target.value === 'none') {
-    sliderFieldset.style.display = 'none';
-    imgPreview.style.filter = 'none';
+    sliderFieldsetElement.style.display = 'none';
+    imgPreviewElement.style.filter = 'none';
   } else {
-    sliderFieldset.style.display = 'block';
+    sliderFieldsetElement.style.display = 'block';
     if (evt.target.matches('input[type="radio"]')) {
-      imgPreview.style.filter = 'none';
-      levelLine.noUiSlider.updateOptions({
+      imgPreviewElement.style.filter = 'none';
+      levelLineElement.noUiSlider.updateOptions({
         range: {
           min: Number(evt.target.dataset.minValue),
           max: Number(evt.target.dataset.maxValue)
@@ -20,20 +20,20 @@ const onFilterChange = (evt) => {
         start: Number(evt.target.dataset.startValue),
         step: Number(evt.target.dataset.step),
       });
-      levelLine.noUiSlider.on('update', () => {
-        sliderInput.value = levelLine.noUiSlider.get();
-        imgPreview.style.filter = 'none';
+      levelLineElement.noUiSlider.on('update', () => {
+        sliderInputElement.value = levelLineElement.noUiSlider.get();
+        imgPreviewElement.style.filter = 'none';
         {
-          imgPreview.style.filter = `${evt.target.dataset.styleName}(${sliderInput.value}${evt.target.dataset.styleSuffix})`;
+          imgPreviewElement.style.filter = `${evt.target.dataset.styleName}(${sliderInputElement.value}${evt.target.dataset.styleSuffix})`;
         }
       });
-      imgPreview.style.filter = `${evt.target.dataset.styleName}(${sliderInput.value}${evt.target.dataset.styleSuffix})`;
+      imgPreviewElement.style.filter = `${evt.target.dataset.styleName}(${sliderInputElement.value}${evt.target.dataset.styleSuffix})`;
     }
   }
 };
 
-const initialisationSlider = () => {
-  noUiSlider.create(levelLine, {
+const initSlider = () => {
+  noUiSlider.create(levelLineElement, {
     range: {
       min: 0,
       max: 100,
@@ -43,9 +43,9 @@ const initialisationSlider = () => {
     connect: 'lower',
   });
 
-  levelLine.noUiSlider.on('update', () => {
-    sliderInput.value = parseInt(levelLine.noUiSlider.get(), 10);
+  levelLineElement.noUiSlider.on('update', () => {
+    sliderInputElement.value = parseInt(levelLineElement.noUiSlider.get(), 10);
   });
 };
 
-export {onFilterChange, initialisationSlider};
+export {onFilterChange, initSlider};
