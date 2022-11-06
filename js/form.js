@@ -117,7 +117,7 @@ const showFailUpload = () => {
       errorModalElement.remove();
     };
 
-    const tesrErrFunction = (element) => {
+    const checkError = (element) => {
       const target = element.target;
       const itsMessage = target === node || node.contains(target);
 
@@ -126,7 +126,7 @@ const showFailUpload = () => {
       }
     };
 
-    document.addEventListener('click', tesrErrFunction);
+    document.addEventListener('click', checkError);
   };
 
   missClickErrorClose(errorInnerElement);
